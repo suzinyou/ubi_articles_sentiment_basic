@@ -5,7 +5,8 @@ requests
 beautifulsoup4
 pandas
 konlpy
+pyLDAvis
 
-transformers
-pytorch
-kobert-transformers
+# transformers
+# pytorch
+# kobert-transformers

@@ -42,8 +42,11 @@ class DaumNewsCrawler(object):
         num_total_results = None
         num_crawled = 0
         num_saved = 0
+        cur_page_start = 1
         save_count = 0
         save_paths = []
+
+        num_regex = re.compile(r'\d+')
 
         while crawl:
             url = f"https://search.daum.net/search?w=news" \
@@ -66,11 +69,11 @@ class DaumNewsCrawler(object):
             cur_page_range, cnt = cnt_text.split("/")
 
             if num_total_results is None:
-                num_total_results = int(''.join(re.findall(r'\d+', cnt)))
+                num_total_results = int(''.join(num_regex.findall(cnt)))
             else:
-                cur_page = int(cur_page_range.split("-")[0].strip())
+                cur_page_start = int(''.join(num_regex.findall(cur_page_range.split("-")[0])))
 
-                if cur_page > num_total_results:
+                if cur_page_start > num_total_results:
                     save_path = self._save(start_date, end_date, save_count=save_count)
                     save_paths.append(save_path)
                     logger.info(f"Crawled all ({num_crawled}) articles. Terminating...")
@@ -96,21 +99,24 @@ class DaumNewsCrawler(object):
                     summary = summary_view.text.strip()
                 else:
                     summary = None
-                paragraphs = article_html.select("div#harmonyContainer.article_view > section > p")
+                paragraphs = article_html.select("div.article_view > section > p")
                 text = '\n\n'.join([p.text.strip() for p in paragraphs])
 
                 if "기본소득" not in text and "기본 소득" not in text:
                     continue
 
+                self._data['url'].append(article_url)
                 self._data['title'].append(title)
                 self._data['date'].append(date)
                 self._data['summary'].append(summary)
                 self._data['text'].append(text)
                 num_crawled += 1
 
-            logger.info(f"Crawled {num_crawled}/{num_total_results}.")
+            logger.info(
+                f"Crawled page {page_num:3d} "
+                f"({num_crawled:4d} relevant articles out of {num_total_results} search results)")
 
-            if num_saved + save_batch_size <= num_crawled or num_crawled + 9 >= num_total_results:
+            if num_saved + save_batch_size <= num_crawled or num_crawled >= num_total_results:
                 logger.debug("Saving...")  # latter case: terminate
                 save_path = self._save(start_date, end_date, save_count=save_count)
                 save_paths.append(save_path)
@@ -136,7 +142,7 @@ class DaumNewsCrawler(object):
             os.remove(path)
 
         df = pd.concat(dfs)
-        df = df[['title', 'date', 'summary', 'text']]
+        df = df[['date', 'url', 'title', 'summary', 'text']]
         csv_path = self.output_dir / f'{start_date}-{end_date}.csv'
         df.to_csv(csv_path, index=False)
         logger.info(f"Saved results to {csv_path}")
