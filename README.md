@@ -1,6 +1,6 @@
 Topic Modeling Articles on UBI 
 ==============================
-This project aims to analyze how major South Korea media's sentiment has shifted since cash relief for the COVID-19 pandemic were given out nationwide. 
+This project aims to analyze how major South Korea media's sentiment toward universal basic income (UBI) has shifted since cash relief for the COVID-19 pandemic were given out nationwide. 
 
 1. Scrape articles containing certain keywords on [Daum News](https://news.daum.net).
 2. Prep the corpus: text cleaning, tokenization, etc.
