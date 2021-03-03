@@ -10,3 +10,5 @@ pyLDAvis
 # transformers
 # pytorch
 # kobert-transformers
+matplotlib
+scikit-learn

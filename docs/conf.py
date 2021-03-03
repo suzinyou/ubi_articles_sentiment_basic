@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# ubi_articles documentation build configuration file, created by
+# ubi_article_sentiment_basic documentation build configuration file, created by
 # sphinx-quickstart.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -41,7 +41,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'ubi_articles'
+project = u'ubi_article_sentiment_basic'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -184,8 +184,8 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
     ('index',
-     'ubi_articles.tex',
-     u'ubi_articles Documentation',
+     'ubi_article_sentiment_basic.tex',
+     u'ubi_article_sentiment_basic Documentation',
      u"Suzin You", 'manual'),
 ]
 
@@ -215,7 +215,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'ubi_articles', u'ubi_articles Documentation',
+    ('index', 'ubi_article_sentiment_basic', u'ubi_article_sentiment_basic Documentation',
      [u"Suzin You"], 1)
 ]
 
@@ -229,8 +229,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'ubi_articles', u'ubi_articles Documentation',
-     u"Suzin You", 'ubi_articles',
+    ('index', 'ubi_article_sentiment_basic', u'ubi_article_sentiment_basic Documentation',
+     u"Suzin You", 'ubi_article_sentiment_basic',
      '기본소득 기사 분석', 'Miscellaneous'),
 ]
 
