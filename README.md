@@ -1,7 +1,12 @@
-ubi_articles
+Topic Modeling Articles on UBI 
 ==============================
+This project aims to analyze how major South Korea media's sentiment has shifted since cash relief for the COVID-19 pandemic were given out nationwide. 
 
-기본소득 기사 분석
+1. Scrape articles containing certain keywords on [Daum News](https://news.daum.net).
+2. Prep the corpus: text cleaning, tokenization, etc.
+3. Run NMF and LDA to gauge distribution of topics
+4. Based on 3, label a sample of the articles. (done manually, outside this project--TODO: share data and labelling standards)
+5. Learn a sentiment classification model from 4 (done in [ubi_article_sentiment](https://github.com/suzinyou/ubi_article_sentiment))
 
 Project Organization
 ------------
