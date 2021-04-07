@@ -19,6 +19,7 @@ class DaumNewsCrawler(object):
     def __init__(self, outlet, search_keyword):
         self.outlet = outlet
         self.output_dir = PROJECT_DIR / 'data' / 'raw' / self.outlet
+        os.makedirs(self.output_dir, exist_ok=True)
         self._cp_key = CP_DICT[outlet]
         self.search_keyword = search_keyword
         self._data = defaultdict(list)
@@ -99,7 +100,7 @@ class DaumNewsCrawler(object):
                     summary = summary_view.text.strip()
                 else:
                     summary = None
-                paragraphs = article_html.select("div.article_view > section > p")
+                paragraphs = article_html.find_all(attrs={"dmcf-ptype": "general"})
                 text = '\n\n'.join([p.text.strip() for p in paragraphs])
 
                 if "기본소득" not in text and "기본 소득" not in text:
